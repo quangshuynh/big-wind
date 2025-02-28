@@ -45,6 +45,8 @@ function App() {
   
   const [fartMultiplier, setFartMultiplier] = useState(1);
 
+  const [jarSaleAnnouncement, setJarSaleAnnouncement] = useState("");
+
   const [clicksPerSecond, setClicksPerSecond] = useState(0);
   const clickTimestamps = useRef([]);
 
@@ -156,7 +158,11 @@ function App() {
     const earnedToots = Math.floor(Math.random() * 9) + 5;
     setToots(prev => prev + earnedToots);
     setSalesOpen(false);
-    alert(`Jar sold! You earned ${earnedToots} Toots.`);
+    
+    setJarSaleAnnouncement(`Jar sold! You earned ${earnedToots} Toots.`);
+    setTimeout(() => {
+      setJarSaleAnnouncement("");
+    }, 3000);
   };
 
   const handleBuyItem = (item) => {
@@ -246,6 +252,12 @@ function App() {
       {showSuperEpicAnimation && (
         <div className="super-epic-animation">
           <h1>SUPER EPIC FART UNLOCKED!</h1>
+        </div>
+      )}
+
+      {jarSaleAnnouncement && (
+        <div className="jar-sale-announcement">
+          <h1>{jarSaleAnnouncement}</h1>
         </div>
       )}
 
