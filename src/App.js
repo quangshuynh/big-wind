@@ -151,9 +151,18 @@ function App() {
 
   const handleNeighborSale = () => {
     if (fartCount < 100) {
-      alert(`${fartCount}/100 farts - Not enough farts to sell a jar!`);
+      const announcement = document.createElement('div');
+      announcement.className = 'not-enough-farts-announcement';
+      announcement.innerHTML = '<h1>You need 100 farts to sell a jar!</h1>';
+      document.body.appendChild(announcement);
+    
+      setTimeout(() => {
+        announcement.remove();
+      }, 3000);
+    
       return;
     }
+    
     setFartCount(prev => prev - 100);
     const earnedToots = Math.floor(Math.random() * 9) + 5;
     setToots(prev => prev + earnedToots);
