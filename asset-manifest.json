@@ -1,11 +1,18 @@
 {
   "files": {
     "main.css": "/big-wind/static/css/main.228d4a8a.css",
-    "main.js": "/big-wind/static/js/main.c8bd9319.js",
+    "main.js": "/big-wind/static/js/main.e5058655.js",
     "static/js/453.072cbd8b.chunk.js": "/big-wind/static/js/453.072cbd8b.chunk.js",
+    "static/media/quang4.png": "/big-wind/static/media/quang4.d23e8c8b964b62a647a1.png",
+    "static/media/quang7.png": "/big-wind/static/media/quang7.f9e0b5a22dd4aa13350f.png",
+    "static/media/quang5.png": "/big-wind/static/media/quang5.b34b8dc400324ae1d47e.png",
+    "static/media/quang3.png": "/big-wind/static/media/quang3.b0c4d3b9f3959e14fbdc.png",
+    "static/media/quang6.png": "/big-wind/static/media/quang6.74abb0490dba99c77c36.png",
     "static/media/fart7.mp3": "/big-wind/static/media/fart7.598ec74da7b3089a0e46.mp3",
     "static/media/fart8.mp3": "/big-wind/static/media/fart8.0cd23573c4e7f437a855.mp3",
+    "static/media/quang1.png": "/big-wind/static/media/quang1.737d1dfa2ca7ee80f000.png",
     "static/media/fart2.mp3": "/big-wind/static/media/fart2.4c48441c3f87e3a8bbd6.mp3",
+    "static/media/quang8.png": "/big-wind/static/media/quang8.5c7192e4e4d35e768d07.png",
     "static/media/fart4.mp3": "/big-wind/static/media/fart4.ae0015f92fb955c1bd4e.mp3",
     "static/media/fart10.mp3": "/big-wind/static/media/fart10.5221ed509531c8d3b468.mp3",
     "static/media/fart9.mp3": "/big-wind/static/media/fart9.dff97d513a24e05174b6.mp3",
@@ -14,13 +21,14 @@
     "static/media/fart11.mp3": "/big-wind/static/media/fart11.f4ceae30e198d8d498ab.mp3",
     "static/media/fart6.mp3": "/big-wind/static/media/fart6.9a20204f68de98312a65.mp3",
     "static/media/fart1.mp3": "/big-wind/static/media/fart1.cdf821cc282a4f980d2d.mp3",
+    "static/media/quang2.png": "/big-wind/static/media/quang2.79d7ae9d47e548671e5d.png",
     "index.html": "/big-wind/index.html",
     "main.228d4a8a.css.map": "/big-wind/static/css/main.228d4a8a.css.map",
-    "main.c8bd9319.js.map": "/big-wind/static/js/main.c8bd9319.js.map",
+    "main.e5058655.js.map": "/big-wind/static/js/main.e5058655.js.map",
     "453.072cbd8b.chunk.js.map": "/big-wind/static/js/453.072cbd8b.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.228d4a8a.css",
-    "static/js/main.c8bd9319.js"
+    "static/js/main.e5058655.js"
   ]
 }
