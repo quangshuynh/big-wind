@@ -1,0 +1,9 @@
+/* frontend/src/index.css */
+body {
+    font-family: sans-serif;
+    margin: 20px;
+}
+
+button {
+    cursor: pointer;
+}
