@@ -1,0 +1,108 @@
+.game-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: var(--background-color);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--secondary-color);
+}
+
+.game-header h1 {
+  color: var(--primary-color);
+  margin: 0;
+  font-size: 2.2rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-info p {
+  margin-right: 15px;
+  font-weight: bold;
+  color: var(--accent-color);
+}
+
+.logout-button {
+  background-color: var(--accent-color);
+  padding: 8px 15px;
+  font-size: 14px;
+  border-radius: 20px;
+  transition: all 0.3s;
+}
+
+.logout-button:hover {
+  background-color: var(--primary-color);
+  transform: scale(1.05);
+}
+
+.game-content {
+  padding: 20px;
+}
+
+.game-stats {
+  text-align: center;
+  margin-bottom: 30px;
+  background-color: rgba(139, 69, 19, 0.1);
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.pfft-counter {
+  font-size: 1.8rem;
+  color: var(--primary-color);
+  font-weight: bold;
+  margin: 0;
+}
+
+.fart-icon {
+  font-size: 24px;
+  animation: float 2s ease-in-out infinite;
+  display: inline-block;
+}
+
+.game-controls {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.save-button {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.save-button:hover {
+  background-color: var(--accent-color);
+  transform: scale(1.05);
+}
+
+.save-button:active {
+  transform: scale(0.95);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
