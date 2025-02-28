@@ -180,6 +180,10 @@ function App() {
 
   const handleBuyItem = (item) => {
     if (item.currency === "farts") {
+      if (item.multiplierIncrease && multiplierAnnouncement !== "") {
+        setTimeout(() => handleBuyItem(item), 3000);
+        return;
+      }      
       if (fartCount < item.price) {
         const announcement = document.createElement('div');
         announcement.className = 'not-enough-farts-announcement';
