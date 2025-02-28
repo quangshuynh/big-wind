@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './App.css';
 import fart1 from './assets/sounds/fart1.mp3';
 import fart2 from './assets/sounds/fart2.mp3';
@@ -36,9 +36,27 @@ function App() {
   ];
 
   const [emojis, setEmojis] = useState([]);
+  const lastPlayed = useRef([]);
 
   const playFart = () => {
-    const randomSound = fartSounds[Math.floor(Math.random() * fartSounds.length)];
+    let availableIndices = [];
+    for (let i = 0; i < fartSounds.length; i++) {
+      if (!lastPlayed.current.includes(i)) {
+        availableIndices.push(i);
+      }
+    }
+    if (availableIndices.length === 0) {
+      availableIndices = fartSounds.map((_, index) => index);
+    }
+    const randomIndex =
+      availableIndices[Math.floor(Math.random() * availableIndices.length)];
+
+    lastPlayed.current.push(randomIndex);
+    if (lastPlayed.current.length > 3) {
+      lastPlayed.current.shift();
+    }
+
+    const randomSound = fartSounds[randomIndex];
     const audio = new Audio(randomSound);
     audio.play();
 
@@ -54,7 +72,8 @@ function App() {
       const dy = Math.sin(angle) * distance;
 
       const duration = 1 + Math.random() * 0.5;
-      const emoji = emojiVariants[Math.floor(Math.random() * emojiVariants.length)];
+      const emoji =
+        emojiVariants[Math.floor(Math.random() * emojiVariants.length)];
       const font = fonts[Math.floor(Math.random() * fonts.length)];
       const fontSize = 2 + Math.random() * 1 + 'rem';
 
