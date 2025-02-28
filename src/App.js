@@ -32,16 +32,18 @@ function App() {
   const emojiVariants = ['💨', '💩', '🤮', '🚽', '🤢'];
   const fonts = ["'Comic Sans MS', sans-serif"];
 
+  const [toots, setToots] = useState(0);
   const [floatingItems, setFloatingItems] = useState([]);
   const lastPlayed = useRef([]);
   const [fartCount, setFartCount] = useState(0);
   const [showSuperEpicAnimation, setShowSuperEpicAnimation] = useState(false);
-  const [pffts, setPffts] = useState(0);
   const [stomach, setStomach] = useState(0); 
   const [tolerance, setTolerance] = useState(0);
   const [storeOpen, setStoreOpen] = useState(false);
   const [salesOpen, setSalesOpen] = useState(false);
   const [accident, setAccident] = useState(false);
+  
+  const [fartMultiplier, setFartMultiplier] = useState(1);
 
   const [clicksPerSecond, setClicksPerSecond] = useState(0);
   const clickTimestamps = useRef([]);
@@ -58,7 +60,7 @@ function App() {
   const playFart = () => {
     if (stomach >= 100) {
       setAccident(true);
-      setPffts(prev => Math.max(0, prev - 10));
+      setToots(prev => Math.max(0, prev - 10));
       setTimeout(() => {
         setAccident(false);
         setStomach(50); 
@@ -68,7 +70,7 @@ function App() {
 
     clickTimestamps.current.push(Date.now());
 
-    const newCount = fartCount + 1;
+    const newCount = fartCount + fartMultiplier;
     setFartCount(newCount);
 
     let randomIndex;
@@ -145,36 +147,59 @@ function App() {
     });
   };
 
-  const handleBuyItem = (item) => {
-    if (pffts < item.price) {
-      alert("Not enough Pffts!");
+  const handleNeighborSale = () => {
+    if (fartCount < 100) {
+      alert(`${fartCount}/100 farts - Not enough farts to sell a jar!`);
       return;
     }
-    setPffts(prev => prev - item.price);
-    setStomach(prev => Math.min(100, prev + item.stomachFill));
-    
-    if (item.category === 'Dairy') {
-      let riskRoll = Math.random();
-      if (riskRoll > tolerance / 10) {
-        alert("Fart Failure! Tummy ache – no boost this time.");
-        return;
-      } else {
-        setTolerance(prev => Math.min(10, prev + 1));
-      }
-    }
-    
-    setPffts(prev => prev + item.boost);
+    setFartCount(prev => prev - 100);
+    const earnedToots = Math.floor(Math.random() * 9) + 5;
+    setToots(prev => prev + earnedToots);
+    setSalesOpen(false);
+    alert(`Jar sold! You earned ${earnedToots} Toots.`);
   };
 
-  const handleNeighborSale = () => {
-    setPffts(prev => prev + 5);
-    setSalesOpen(false);
-    alert("Neighbor sale successful! You earned some Pffts.");
+  const handleBuyItem = (item) => {
+    if (item.currency === "farts") {
+      if (fartCount < item.price) {
+        alert("Not enough farts!");
+        return;
+      }
+      setFartCount(prev => prev - item.price);
+      if (item.multiplierIncrease) {
+        setFartMultiplier(prev => prev + item.multiplierIncrease);
+        alert(`Fart Multiplier increased to ${fartMultiplier + item.multiplierIncrease}!`);
+      }
+      return;
+    } else {
+      if (toots < item.price) {
+        alert("Not enough Toots!");
+        return;
+      }
+      setToots(prev => prev - item.price);
+      setStomach(prev => Math.min(100, prev + item.stomachFill));
+      
+      if (item.category === 'Dairy') {
+        let riskRoll = Math.random();
+        if (riskRoll > tolerance / 10) {
+          alert("Fart Failure! Tummy ache – no boost this time.");
+          return;
+        } else {
+          setTolerance(prev => Math.min(10, prev + 1));
+        }
+      }
+      
+      setToots(prev => prev + item.boost);
+    }
   };
 
   return (
     <div className="App">
-      {storeOpen && (<Modal onClose={() => setStoreOpen(false)}><GroceryStore onBuyItem={handleBuyItem} /></Modal>)}
+      {storeOpen && (
+        <Modal onClose={() => setStoreOpen(false)}>
+          <GroceryStore onBuyItem={handleBuyItem} />
+        </Modal>
+      )}
       {salesOpen && (
         <Modal onClose={() => setSalesOpen(false)}>
           <NeighborhoodSales onSale={handleNeighborSale} />
@@ -227,8 +252,10 @@ function App() {
       <header className="App-header">
         <h1>Fartastic Fun!</h1>
         <p>Fart Count: {fartCount}</p>
-        <p className="clicks-per-second" style={{ fontSize: '0.8em' }}>Clicks per second: {clicksPerSecond}</p>
-        <p>Pffts: {pffts}</p>
+        <p className="clicks-per-second" style={{ fontSize: '0.8em' }}>
+          Clicks per second: {clicksPerSecond}
+        </p>
+        <p>Toots: {toots}</p>
         <p>Stomach: {stomach} / 100</p>
         <p>Tolerance: {tolerance} / 10</p>
         <button className="fart-button" onClick={playFart}>

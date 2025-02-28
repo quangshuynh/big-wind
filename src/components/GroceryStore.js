@@ -17,11 +17,19 @@ const categories = {
     { name: "Durian", price: 40, boost: 3, duration: 12, risk: 0.4, category: "Exotic", stomachFill: 25 },
   ],
   "RIT Delights": [
-    { name: "Garbage Plates", price: 50, boost: 4, duration: 10, risk: 0.2, category: "RIT", stomachFill: 30 },
     { name: "Tiger Fuel Energy Drink", price: 35, boost: 3, duration: 5, risk: 0.1, category: "RIT", stomachFill: 15 },
   ],
-  "CS House": [
-    { name: "Special Ingredient", price: 8, boost: 1, duration: 10, risk: 0.05, category: "Special", stomachFill: 8 },
+  "Rochester": [
+    { name: "Garbage Plates", price: 50, boost: 4, duration: 10, risk: 0.2, category: "RIT", stomachFill: 30 },
+  ],
+  "Upgrades": [
+    {
+      name: "Fart Multiplier Upgrade",
+      price: 50,
+      currency: "farts",
+      multiplierIncrease: 1,
+      description: "Increase your fart multiplier by 1."
+    }
   ]
 };
 
@@ -46,9 +54,14 @@ const GroceryStore = ({ onBuyItem }) => {
         {categories[selectedCategory].map((item, index) => (
           <div key={index} className="item-card">
             <h3>{item.name}</h3>
-            <p>Price: {item.price} Pffts</p>
-            <p>Boost: +{item.boost}</p>
-            <p>Risk: {Math.round(item.risk * 100)}%</p>
+            <p>
+              Price: {item.price} {item.currency === 'farts' ? 'Farts' : 'Toots'}
+            </p>
+            {item.boost && <p>Boost: +{item.boost}</p>}
+            {item.risk !== undefined && <p>Risk: {Math.round(item.risk * 100)}%</p>}
+            {item.stomachFill && <p>Stomach Fill: {item.stomachFill}</p>}
+            {item.multiplierIncrease && <p>Multiplier Increase: +{item.multiplierIncrease}</p>}
+            {item.description && <p>{item.description}</p>}
             <button onClick={() => onBuyItem(item)}>Buy</button>
           </div>
         ))}
