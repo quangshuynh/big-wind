@@ -1,0 +1,83 @@
+.App {
+  text-align: center;
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.emoji-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.floating-emoji {
+  position: absolute;
+  animation-name: flyEmoji;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes flyEmoji {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--dx), var(--dy)) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.App-header {
+  background-color: rgba(255, 239, 213, 0.9);
+  border-radius: 20px;
+  padding: 50px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+  margin: 20px;
+}
+
+h1 {
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  color: #ff4500;
+  margin-bottom: 20px;
+}
+
+.fart-button {
+  font-size: 1.2em;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 30px;
+  background-color: #ff69b4;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.fart-button:hover {
+  background-color: #ff85c0;
+  transform: scale(1.05);
+}
+
+@media (max-width: 600px) {
+  .App-header {
+    padding: 30px;
+    margin: 10px;
+  }
+  h1 {
+    font-size: 1.5em;
+  }
+  .fart-button {
+    font-size: 1em;
+    padding: 10px 20px;
+  }
+}
