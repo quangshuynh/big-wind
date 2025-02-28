@@ -43,13 +43,11 @@ function App() {
   const [storeOpen, setStoreOpen] = useState(false);
   const [salesOpen, setSalesOpen] = useState(false);
   const [accident, setAccident] = useState(false);
-  
   const [fartMultiplier, setFartMultiplier] = useState(1);
-
   const [jarSaleAnnouncement, setJarSaleAnnouncement] = useState("");
-
   const [clicksPerSecond, setClicksPerSecond] = useState(0);
   const clickTimestamps = useRef([]);
+  const [superEpicUnlocked, setSuperEpicUnlocked] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -77,10 +75,11 @@ function App() {
     setFartCount(newCount);
 
     let randomIndex;
-    if (newCount === 100) {
-      randomIndex = fartSounds.length - 1;
+    if (newCount === 100 && !superEpicUnlocked) {
+      setSuperEpicUnlocked(true);
       setShowSuperEpicAnimation(true);
       setTimeout(() => setShowSuperEpicAnimation(false), 3000);
+      randomIndex = fartSounds.length - 1;
     } else if (newCount < 100) {
       let availableIndices = [];
       for (let i = 0; i < fartSounds.length - 1; i++) {
@@ -104,24 +103,26 @@ function App() {
       }
       randomIndex = availableIndices[Math.floor(Math.random() * availableIndices.length)];
     }
+    
     lastPlayed.current.push(randomIndex);
     if (lastPlayed.current.length > 3) {
       lastPlayed.current.shift();
     }
+  
     const randomSound = fartSounds[randomIndex];
     const audio = new Audio(randomSound);
     audio.play();
-
+  
     setFloatingItems([]);
-
+  
     const allUnique = [
       ...emojiVariants.map(emoji => ({ type: 'emoji', content: emoji })),
       ...customImages.map(src => ({ type: 'image', src }))
     ];
-
+  
     const shuffled = allUnique.sort(() => Math.random() - 0.5);
     const selected = shuffled.slice(0, 10);
-
+  
     const newItems = selected.map((item, index) => {
       const id = Date.now() + '-' + index;
       const left = Math.random() * 100;
@@ -131,7 +132,7 @@ function App() {
       const dx = Math.cos(angle) * distance;
       const dy = Math.sin(angle) * distance;
       const duration = 1 + Math.random() * 0.5;
-
+  
       if (item.type === 'emoji') {
         const font = fonts[Math.floor(Math.random() * fonts.length)];
         const fontSize = 2 + Math.random() * 1 + 'rem';
@@ -140,9 +141,9 @@ function App() {
         return { ...item, id, left, top, dx, dy, duration };
       }
     });
-
+  
     setFloatingItems(newItems);
-
+  
     newItems.forEach(item => {
       setTimeout(() => {
         setFloatingItems(prev => prev.filter(i => i.id !== item.id));
