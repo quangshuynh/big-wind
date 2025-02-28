@@ -1,8 +1,9 @@
 {
   "files": {
-    "main.css": "/big-wind/static/css/main.a06cfa0d.css",
-    "main.js": "/big-wind/static/js/main.1a76079a.js",
+    "main.css": "/big-wind/static/css/main.c2a9c635.css",
+    "main.js": "/big-wind/static/js/main.4a06a9ab.js",
     "static/js/453.072cbd8b.chunk.js": "/big-wind/static/js/453.072cbd8b.chunk.js",
+    "static/media/olivier1.png": "/big-wind/static/media/olivier1.16d908513923a6495ca0.png",
     "static/media/quang4.png": "/big-wind/static/media/quang4.d23e8c8b964b62a647a1.png",
     "static/media/quang7.png": "/big-wind/static/media/quang7.f9e0b5a22dd4aa13350f.png",
     "static/media/quang5.png": "/big-wind/static/media/quang5.b34b8dc400324ae1d47e.png",
@@ -24,12 +25,12 @@
     "static/media/fart1.mp3": "/big-wind/static/media/fart1.cdf821cc282a4f980d2d.mp3",
     "static/media/quang2.png": "/big-wind/static/media/quang2.79d7ae9d47e548671e5d.png",
     "index.html": "/big-wind/index.html",
-    "main.a06cfa0d.css.map": "/big-wind/static/css/main.a06cfa0d.css.map",
-    "main.1a76079a.js.map": "/big-wind/static/js/main.1a76079a.js.map",
+    "main.c2a9c635.css.map": "/big-wind/static/css/main.c2a9c635.css.map",
+    "main.4a06a9ab.js.map": "/big-wind/static/js/main.4a06a9ab.js.map",
     "453.072cbd8b.chunk.js.map": "/big-wind/static/js/453.072cbd8b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a06cfa0d.css",
-    "static/js/main.1a76079a.js"
+    "static/css/main.c2a9c635.css",
+    "static/js/main.4a06a9ab.js"
   ]
 }
