@@ -29,11 +29,18 @@
     border-radius: 15px;
     z-index: 1000;
     animation: declineAnnouncementAnimation 3s forwards;
-  }
+    pointer-events: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;   
+    -ms-user-select: none;    
+    user-select: none;        
+}
   
   .decline-announcement h1 {
     font-family: 'Comic Sans MS', sans-serif;
     margin: 0;
+    pointer-events: none;
+    user-select: none;
   }
   
   @keyframes declineAnnouncementAnimation {

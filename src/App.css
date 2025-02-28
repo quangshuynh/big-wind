@@ -168,6 +168,11 @@ h1 {
   border-radius: 15px;
   z-index: 4;
   animation: jarSaleAnimation 3s forwards;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;   
+  -ms-user-select: none;    
+  user-select: none;        
 }
 
 .jar-sale-announcement h1 {
@@ -200,6 +205,11 @@ h1 {
   border-radius: 15px;
   z-index: 200; 
   animation: notEnoughFartsAnimation 3s forwards;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;   
+  -ms-user-select: none;    
+  user-select: none;        
 }
 
 .not-enough-farts-announcement h1 {

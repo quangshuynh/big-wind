@@ -17,18 +17,19 @@ import fart10 from './assets/sounds/fart10.mp3';
 import fart11 from './assets/sounds/fart11.mp3';
 import superepicfart from './assets/sounds/superepicfart.mp3';
 
-import quang1 from './assets/quang/quang1.png';
-import quang2 from './assets/quang/quang2.png';
-import quang3 from './assets/quang/quang3.png';
-import quang4 from './assets/quang/quang4.png';
-import quang5 from './assets/quang/quang5.png';
-import quang6 from './assets/quang/quang6.png';
-import quang7 from './assets/quang/quang7.png';
-import quang8 from './assets/quang/quang8.png';
+import quang1 from './assets/images/quang1.png';
+import quang2 from './assets/images/quang2.png';
+import quang3 from './assets/images/quang3.png';
+import quang4 from './assets/images/quang4.png';
+import quang5 from './assets/images/quang5.png';
+import quang6 from './assets/images/quang6.png';
+import quang7 from './assets/images/quang7.png';
+import quang8 from './assets/images/quang8.png';
+import olivier1 from './assets/images/olivier1.png';
 
 function App() {
   const fartSounds = [fart1, fart2, fart3, fart4, fart5, fart6, fart7, fart8, fart9, fart10, fart11, superepicfart];
-  const customImages = [quang1, quang2, quang3, quang4, quang5, quang6, quang7, quang8];
+  const customImages = [quang1, quang2, quang3, quang4, quang5, quang6, quang7, quang8, olivier1];
   const emojiVariants = ['💨', '💩', '🤮', '🚽', '🤢'];
   const fonts = ["'Comic Sans MS', sans-serif"];
 
@@ -177,7 +178,15 @@ function App() {
   const handleBuyItem = (item) => {
     if (item.currency === "farts") {
       if (fartCount < item.price) {
-        alert("Not enough farts!");
+        const announcement = document.createElement('div');
+        announcement.className = 'not-enough-farts-announcement';
+        announcement.innerHTML = '<h1>Not enough farts!</h1>';
+        document.body.appendChild(announcement);
+      
+        setTimeout(() => {
+          announcement.remove();
+        }, 3000);
+      
         return;
       }
       setFartCount(prev => prev - item.price);
@@ -188,7 +197,15 @@ function App() {
       return;
     } else {
       if (toots < item.price) {
-        alert("Not enough Toots!");
+        const announcement = document.createElement('div');
+        announcement.className = 'not-enough-farts-announcement';
+        announcement.innerHTML = '<h1>Not enough toots!</h1>';
+        document.body.appendChild(announcement);
+      
+        setTimeout(() => {
+          announcement.remove();
+        }, 3000);
+      
         return;
       }
       setToots(prev => prev - item.price);

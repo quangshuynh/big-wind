@@ -9,12 +9,20 @@ const neighbors = [
 
 const NeighborhoodSales = ({ onSale }) => {
   const [showDecline, setShowDecline] = useState(false);
+  const [cooldown, setCooldown] = useState(false);
 
   const handleDecline = () => {
+    if (cooldown) return; 
+    setCooldown(true);
     setShowDecline(true);
+
     setTimeout(() => {
       setShowDecline(false);
     }, 3000);
+
+    setTimeout(() => {
+      setCooldown(false);
+    }, 10000);
   };
 
   const randomNeighbor = neighbors[Math.floor(Math.random() * neighbors.length)];
@@ -24,7 +32,9 @@ const NeighborhoodSales = ({ onSale }) => {
       <h2>Neighbor Request</h2>
       <p>{randomNeighbor.name} needs a {randomNeighbor.request}.</p>
       <button onClick={onSale}>Sell Jar</button>
-      <button onClick={handleDecline}>Decline</button>
+      <button onClick={handleDecline} disabled={cooldown}>
+        {cooldown ? "Please wait..." : "Decline"}
+      </button>
       {showDecline && (
         <div className="decline-announcement">
           <h1>Maybe next time!</h1>
