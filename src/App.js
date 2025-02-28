@@ -1,5 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './App.css';
+import GroceryStore from './components/GroceryStore';
+import NeighborhoodSales from './components/NeighborhoodSales';
+import Modal from './components/Modal';
+
 import fart1 from './assets/sounds/fart1.mp3';
 import fart2 from './assets/sounds/fart2.mp3';
 import fart3 from './assets/sounds/fart3.mp3';
@@ -12,6 +16,7 @@ import fart9 from './assets/sounds/fart9.mp3';
 import fart10 from './assets/sounds/fart10.mp3';
 import fart11 from './assets/sounds/fart11.mp3';
 import superepicfart from './assets/sounds/superepicfart.mp3';
+
 import quang1 from './assets/quang/quang1.png';
 import quang2 from './assets/quang/quang2.png';
 import quang3 from './assets/quang/quang3.png';
@@ -31,6 +36,12 @@ function App() {
   const lastPlayed = useRef([]);
   const [fartCount, setFartCount] = useState(0);
   const [showSuperEpicAnimation, setShowSuperEpicAnimation] = useState(false);
+  const [pffts, setPffts] = useState(0);
+  const [stomach, setStomach] = useState(0); 
+  const [tolerance, setTolerance] = useState(0);
+  const [storeOpen, setStoreOpen] = useState(false);
+  const [salesOpen, setSalesOpen] = useState(false);
+  const [accident, setAccident] = useState(false);
 
   const [clicksPerSecond, setClicksPerSecond] = useState(0);
   const clickTimestamps = useRef([]);
@@ -45,6 +56,16 @@ function App() {
   }, []);
 
   const playFart = () => {
+    if (stomach >= 100) {
+      setAccident(true);
+      setPffts(prev => Math.max(0, prev - 10));
+      setTimeout(() => {
+        setAccident(false);
+        setStomach(50); 
+      }, 3000);
+      return;
+    }
+
     clickTimestamps.current.push(Date.now());
 
     const newCount = fartCount + 1;
@@ -124,8 +145,41 @@ function App() {
     });
   };
 
+  const handleBuyItem = (item) => {
+    if (pffts < item.price) {
+      alert("Not enough Pffts!");
+      return;
+    }
+    setPffts(prev => prev - item.price);
+    setStomach(prev => Math.min(100, prev + item.stomachFill));
+    
+    if (item.category === 'Dairy') {
+      let riskRoll = Math.random();
+      if (riskRoll > tolerance / 10) {
+        alert("Fart Failure! Tummy ache – no boost this time.");
+        return;
+      } else {
+        setTolerance(prev => Math.min(10, prev + 1));
+      }
+    }
+    
+    setPffts(prev => prev + item.boost);
+  };
+
+  const handleNeighborSale = () => {
+    setPffts(prev => prev + 5);
+    setSalesOpen(false);
+    alert("Neighbor sale successful! You earned some Pffts.");
+  };
+
   return (
     <div className="App">
+      {storeOpen && (<Modal onClose={() => setStoreOpen(false)}><GroceryStore onBuyItem={handleBuyItem} /></Modal>)}
+      {salesOpen && (
+        <Modal onClose={() => setSalesOpen(false)}>
+          <NeighborhoodSales onSale={handleNeighborSale} />
+        </Modal>
+      )}
       <div className="emoji-container">
         {floatingItems.map(item =>
           item.type === 'emoji' ? (
@@ -173,13 +227,28 @@ function App() {
       <header className="App-header">
         <h1>Fartastic Fun!</h1>
         <p>Fart Count: {fartCount}</p>
-        <p className="clicks-per-second" style={{ fontSize: '0.8em' }}>
-          Clicks per second: {clicksPerSecond}
-        </p>
+        <p className="clicks-per-second" style={{ fontSize: '0.8em' }}>Clicks per second: {clicksPerSecond}</p>
+        <p>Pffts: {pffts}</p>
+        <p>Stomach: {stomach} / 100</p>
+        <p>Tolerance: {tolerance} / 10</p>
         <button className="fart-button" onClick={playFart}>
           Make a Fart Noise!
         </button>
+        <div className="action-buttons">
+          <button className="store-button" onClick={() => setStoreOpen(true)}>
+            Open Grocery Store
+          </button>
+          <button className="sales-button" onClick={() => setSalesOpen(true)}>
+            Visit Neighbors
+          </button>
+        </div>
       </header>
+      
+      {accident && (
+         <div className="accident-modal">
+            <h2>Oh no! Your stomach is overfilled—clean up time!</h2>
+         </div>
+      )}
     </div>
   );
 }

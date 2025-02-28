@@ -1,0 +1,54 @@
+.grocery-store {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .category-tabs {
+    margin-bottom: 20px;
+  }
+  
+  .tab-button {
+    margin: 5px;
+    padding: 10px 15px;
+    border: none;
+    background-color: #ff85c0;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .tab-button.active,
+  .tab-button:hover {
+    background-color: #ff69b4;
+  }
+  
+  .item-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .item-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin: 10px;
+    padding: 15px;
+    width: 150px;
+    transition: transform 0.2s;
+  }
+  
+  .item-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .item-card button {
+    background-color: #ff69b4;
+    border: none;
+    padding: 8px 12px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
