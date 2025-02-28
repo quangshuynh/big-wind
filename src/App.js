@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './App.css';
 import fart1 from './assets/sounds/fart1.mp3';
 import fart2 from './assets/sounds/fart2.mp3';
@@ -29,14 +29,28 @@ function App() {
   const quangImages = [quang1, quang2, quang3, quang4, quang5, quang6, quang7, quang8];
 
   const emojiVariants = ['💨', '💩', '🤮', '🚽', '🤢'];
-  const fonts = ["'Comic Sans MS', cursive, sans-serif"];
+  const fonts = ["'Comic Sans MS', sans-serif"];
 
   const [floatingItems, setFloatingItems] = useState([]);
   const lastPlayed = useRef([]);
   const [fartCount, setFartCount] = useState(0);
   const [showSuperEpicAnimation, setShowSuperEpicAnimation] = useState(false);
 
+  const [clicksPerSecond, setClicksPerSecond] = useState(0);
+  const clickTimestamps = useRef([]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const now = Date.now();
+      clickTimestamps.current = clickTimestamps.current.filter(ts => now - ts <= 1000);
+      setClicksPerSecond(clickTimestamps.current.length);
+    }, 100);
+    return () => clearInterval(interval);
+  }, []);
+
   const playFart = () => {
+    clickTimestamps.current.push(Date.now());
+
     const newCount = fartCount + 1;
     setFartCount(newCount);
 
@@ -163,6 +177,9 @@ function App() {
       <header className="App-header">
         <h1>Fartastic Fun!</h1>
         <p>Fart Count: {fartCount}</p>
+        <p className="clicks-per-second" style={{ fontSize: '0.8em' }}>
+          Clicks per second: {clicksPerSecond}
+        </p>
         <button className="fart-button" onClick={playFart}>
           Make a Fart Noise!
         </button>
