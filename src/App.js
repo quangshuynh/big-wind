@@ -22,12 +22,8 @@ import quang7 from './assets/quang/quang7.png';
 import quang8 from './assets/quang/quang8.png';
 
 function App() {
-  const fartSounds = [
-    fart1, fart2, fart3, fart4, fart5, fart6,
-    fart7, fart8, fart9, fart10, fart11, superepicfart
-  ];
-  const quangImages = [quang1, quang2, quang3, quang4, quang5, quang6, quang7, quang8];
-
+  const fartSounds = [fart1, fart2, fart3, fart4, fart5, fart6, fart7, fart8, fart9, fart10, fart11, superepicfart];
+  const customImages = [quang1, quang2, quang3, quang4, quang5, quang6, quang7, quang8];
   const emojiVariants = ['💨', '💩', '🤮', '🚽', '🤢'];
   const fonts = ["'Comic Sans MS', sans-serif"];
 
@@ -94,7 +90,7 @@ function App() {
 
     const allUnique = [
       ...emojiVariants.map(emoji => ({ type: 'emoji', content: emoji })),
-      ...quangImages.map(src => ({ type: 'image', src }))
+      ...customImages.map(src => ({ type: 'image', src }))
     ];
 
     const shuffled = allUnique.sort(() => Math.random() - 0.5);
