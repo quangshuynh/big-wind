@@ -11,31 +11,23 @@ import fart8 from './assets/sounds/fart8.mp3';
 import fart9 from './assets/sounds/fart9.mp3';
 import fart10 from './assets/sounds/fart10.mp3';
 import fart11 from './assets/sounds/fart11.mp3';
+import quang1 from './assets/quang/quang1.png';
+import quang2 from './assets/quang/quang2.png';
+import quang3 from './assets/quang/quang3.png';
+import quang4 from './assets/quang/quang4.png';
+import quang5 from './assets/quang/quang5.png';
+import quang6 from './assets/quang/quang6.png';
+import quang7 from './assets/quang/quang7.png';
+import quang8 from './assets/quang/quang8.png';
 
 function App() {
-  const fartSounds = [
-    fart1,
-    fart2,
-    fart3,
-    fart4,
-    fart5,
-    fart6,
-    fart7,
-    fart8,
-    fart9,
-    fart10,
-    fart11,
-  ];
+  const fartSounds = [fart1, fart2, fart3, fart4, fart5, fart6, fart7, fart8, fart9, fart10, fart11];
+  const quangImages = [quang1, quang2, quang3, quang4, quang5, quang6, quang7, quang8];
 
-  const emojiVariants = ['💨', '💩', '🤮'];
-  const fonts = [
-    "'Comic Sans MS', cursive, sans-serif",
-    // "'Arial Black', Gadget, sans-serif",
-    // "'Courier New', Courier, monospace",
-    // "Impact, Charcoal, sans-serif",
-  ];
-
-  const [emojis, setEmojis] = useState([]);
+  const emojiVariants = ['💨', '💩', '🤮', '🚽', '🤢'];
+  const fonts = ["'Comic Sans MS', cursive, sans-serif"];
+  
+  const [floatingItems, setFloatingItems] = useState([]);
   const lastPlayed = useRef([]);
 
   const playFart = () => {
@@ -50,63 +42,90 @@ function App() {
     }
     const randomIndex =
       availableIndices[Math.floor(Math.random() * availableIndices.length)];
-
     lastPlayed.current.push(randomIndex);
     if (lastPlayed.current.length > 3) {
       lastPlayed.current.shift();
     }
-
     const randomSound = fartSounds[randomIndex];
     const audio = new Audio(randomSound);
     audio.play();
 
-    const count = 5;
-    for (let i = 0; i < count; i++) {
-      const id = Date.now() + '-' + i;
+    setFloatingItems([]);
+
+    const allUnique = [
+      ...emojiVariants.map(emoji => ({ type: 'emoji', content: emoji })),
+      ...quangImages.map(src => ({ type: 'image', src }))
+    ];
+
+    const shuffled = allUnique.sort(() => Math.random() - 0.5);
+    const selected = shuffled.slice(0, 10);
+
+    const newItems = selected.map((item, index) => {
+      const id = Date.now() + '-' + index;
       const left = Math.random() * 100;
       const top = Math.random() * 100;
-
       const angle = Math.random() * 2 * Math.PI;
       const distance = 100 + Math.random() * 200;
       const dx = Math.cos(angle) * distance;
       const dy = Math.sin(angle) * distance;
+      const duration = 1 + Math.random() * 0.5; 
 
-      const duration = 1 + Math.random() * 0.5;
-      const emoji =
-        emojiVariants[Math.floor(Math.random() * emojiVariants.length)];
-      const font = fonts[Math.floor(Math.random() * fonts.length)];
-      const fontSize = 2 + Math.random() * 1 + 'rem';
+      if (item.type === 'emoji') {
+        const font = fonts[Math.floor(Math.random() * fonts.length)];
+        const fontSize = 2 + Math.random() * 1 + 'rem';
+        return { ...item, id, left, top, dx, dy, duration, font, fontSize };
+      } else {
+        return { ...item, id, left, top, dx, dy, duration };
+      }
+    });
 
-      const newEmoji = { id, left, top, dx, dy, duration, emoji, font, fontSize };
+    setFloatingItems(newItems);
 
-      setEmojis(prev => [...prev, newEmoji]);
-
+    newItems.forEach(item => {
       setTimeout(() => {
-        setEmojis(prev => prev.filter(e => e.id !== id));
-      }, duration * 1000);
-    }
+        setFloatingItems(prev => prev.filter(i => i.id !== item.id));
+      }, item.duration * 1000);
+    });
   };
 
   return (
     <div className="App">
       <div className="emoji-container">
-        {emojis.map(e => (
-          <div
-            key={e.id}
-            className="floating-emoji"
-            style={{
-              left: `${e.left}%`,
-              top: `${e.top}%`,
-              animationDuration: `${e.duration}s`,
-              '--dx': `${e.dx}px`,
-              '--dy': `${e.dy}px`,
-              fontFamily: e.font,
-              fontSize: e.fontSize,
-            }}
-          >
-            {e.emoji}
-          </div>
-        ))}
+        {floatingItems.map(item =>
+          item.type === 'emoji' ? (
+            <div
+              key={item.id}
+              className="floating-emoji"
+              style={{
+                left: `${item.left}%`,
+                top: `${item.top}%`,
+                animationDuration: `${item.duration}s`,
+                '--dx': `${item.dx}px`,
+                '--dy': `${item.dy}px`,
+                fontFamily: item.font,
+                fontSize: item.fontSize,
+              }}
+            >
+              {item.content}
+            </div>
+          ) : (
+            <img
+              key={item.id}
+              className="floating-emoji"
+              src={item.src}
+              alt="Floating Quang"
+              style={{
+                left: `${item.left}%`,
+                top: `${item.top}%`,
+                animationDuration: `${item.duration}s`,
+                '--dx': `${item.dx}px`,
+                '--dy': `${item.dy}px`,
+                width: '50px',
+                height: 'auto',
+              }}
+            />
+          )
+        )}
       </div>
 
       <header className="App-header">
