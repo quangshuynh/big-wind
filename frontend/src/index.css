@@ -1,9 +1,150 @@
 /* frontend/src/index.css */
+:root {
+  --primary-color: #8B4513; /* Brown for the "fart" theme */
+  --secondary-color: #D2B48C; /* Tan */
+  --accent-color: #556B2F; /* Dark olive green */
+  --background-color: #FFF8DC; /* Cornsilk */
+  --text-color: #3E2723; /* Dark brown */
+  --error-color: #B71C1C; /* Dark red */
+}
+
 body {
-    font-family: sans-serif;
-    margin: 20px;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.auth-container {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-container::before {
+  content: "💨";
+  position: absolute;
+  font-size: 100px;
+  opacity: 0.05;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+}
+
+.auth-container h2 {
+  color: var(--primary-color);
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+  position: relative;
+  z-index: 1;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid var(--secondary-color);
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+input:focus {
+  border-color: var(--primary-color);
+  outline: none;
 }
 
 button {
-    cursor: pointer;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 12px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  position: relative;
+  z-index: 1;
+}
+
+button:hover {
+  background-color: var(--accent-color);
+}
+
+.error-message {
+  color: var(--error-color);
+  margin-bottom: 15px;
+  font-weight: bold;
+  position: relative;
+  z-index: 1;
+}
+
+.auth-link {
+  margin-top: 20px;
+  color: var(--primary-color);
+  text-decoration: none;
+  position: relative;
+  z-index: 1;
+}
+
+.auth-link:hover {
+  text-decoration: underline;
+}
+
+.auth-title {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+}
+
+.auth-subtitle {
+  font-size: 1.2rem;
+  color: var(--accent-color);
+  margin-bottom: 30px;
+}
+
+.fart-icon {
+  font-size: 24px;
+  margin-right: 8px;
+  animation: float 2s ease-in-out infinite;
+  display: inline-block;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.button-with-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
 }

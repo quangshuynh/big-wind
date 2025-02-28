@@ -1,7 +1,7 @@
 // frontend/src/components/Auth/Register.js
 import React, { useState } from 'react';
 import { registerUser } from '../../services/api';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 function Register() {
   const [username, setUsername] = useState('');
@@ -29,42 +29,59 @@ function Register() {
   };
 
   return (
-    <div>
-      <h2>Register</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+    <div className="auth-container">
+      <h1 className="auth-title">Pfft Clicker</h1>
+      <p className="auth-subtitle">Join the gassy adventure!</p>
+      
+      <h2><span className="fart-icon">💨</span> Register</h2>
+      
+      {error && <p className="error-message">{error}</p>}
+      
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className="form-group">
           <label htmlFor="username">Username:</label>
           <input
             type="text"
             id="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            placeholder="Choose a username"
             required
           />
         </div>
-        <div>
+        
+        <div className="form-group">
           <label htmlFor="password">Password:</label>
           <input
             type="password"
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            placeholder="Create a password"
             required
           />
         </div>
-        <div>
+        
+        <div className="form-group">
           <label htmlFor="confirmPassword">Confirm Password:</label>
           <input
             type="password"
             id="confirmPassword"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
+            placeholder="Confirm your password"
             required
           />
         </div>
-        <button type="submit">Register</button>
+        
+        <button type="submit" className="button-with-icon">
+          <span className="fart-icon">💨</span> Register
+        </button>
       </form>
+      
+      <p>
+        Already have an account? <Link to="/login" className="auth-link">Login here</Link>
+      </p>
     </div>
   );
 }

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { loginSuccess } from '../../store/authSlice'; //import action
 import { loginUser } from '../../services/api';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 function Login() {
     const [username, setUsername] = useState('');
@@ -27,32 +27,47 @@ function Login() {
     };
 
   return (
-    <div>
-      <h2>Login</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+    <div className="auth-container">
+      <h1 className="auth-title">Pfft Clicker</h1>
+      <p className="auth-subtitle">The gassiest game around!</p>
+      
+      <h2><span className="fart-icon">💨</span> Login</h2>
+      
+      {error && <p className="error-message">{error}</p>}
+      
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className="form-group">
           <label htmlFor="username">Username:</label>
           <input
             type="text"
             id="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            placeholder="Enter your username"
             required
           />
         </div>
-        <div>
+        
+        <div className="form-group">
           <label htmlFor="password">Password:</label>
           <input
             type="password"
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter your password"
             required
           />
         </div>
-        <button type="submit">Login</button>
+        
+        <button type="submit" className="button-with-icon">
+          <span className="fart-icon">💨</span> Login
+        </button>
       </form>
+      
+      <p>
+        Don't have an account? <Link to="/register" className="auth-link">Register here</Link>
+      </p>
     </div>
   );
 }

@@ -5,10 +5,11 @@ import Inventory from './Inventory';
 import Store from './Store';
 import UpgradePanel from './UpgradePanel';
 import { useDispatch, useSelector } from 'react-redux';
-import { setPffts, fillJar, addJar,mbuyUpgrade } from '../../store/gameSlice'; //import all actions
+import { setPffts, fillJar, addJar, buyUpgrade } from '../../store/gameSlice'; //import all actions
 import { loadUserData, saveUserData } from '../../services/api';
 import { logout } from '../../store/authSlice';
 import { useNavigate } from 'react-router-dom';
+import './Game.css';
 
 function Game() {
   const dispatch = useDispatch();
@@ -55,7 +56,7 @@ function Game() {
       // If there's an available jar, fill it based on improvedDigestion upgrade level
       if (availableJar) {
         const fillAmount = upgrades.improvedDigestion * 0.1; // Example: 0.1 Pffts per second per level
-        dispatch(fillJar({ jarId: availableJar.id, amount: fillAmount }));
+        dispatch(fillJar({ jarId: availableJar.id,  amount: fillAmount }));
       }
     }, 1000);  // Run every 1 second
 
@@ -79,16 +80,31 @@ function Game() {
     navigate('/login');
   }
   return (
-    <div>
-      <h2>Fart Factory Tycoon</h2>
-      <p>Welcome, {username}!</p>
-      <p>Pffts: {pffts.toFixed(1)}</p> {/* Display Pffts */}
-      <FartButton />
-      <Inventory />
-      <Store />
-      <UpgradePanel/>
-      <button onClick={handleSave}>Save Game</button>
-      <button onClick={handleLogout}>Logout</button>
+    <div className="game-container">
+      <header className="game-header">
+        <h1>Fart Factory Tycoon</h1>
+        <div className="user-info">
+          <p>Welcome, {username}! <span className="fart-icon">💨</span></p>
+          <button onClick={handleLogout} className="logout-button">Logout</button>
+        </div>
+      </header>
+
+      <div className="game-content">
+        <div className="game-stats">
+          <p className="pfft-counter">Pffts: {pffts.toFixed(1)}</p>
+        </div>
+
+        <FartButton />
+        <Inventory />
+        <Store />
+        <UpgradePanel />
+
+        <div className="game-controls">
+          <button onClick={handleSave} className="save-button">
+            <span className="fart-icon">💾</span> Save Game
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
