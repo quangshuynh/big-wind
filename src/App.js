@@ -11,6 +11,7 @@ import fart8 from './assets/sounds/fart8.mp3';
 import fart9 from './assets/sounds/fart9.mp3';
 import fart10 from './assets/sounds/fart10.mp3';
 import fart11 from './assets/sounds/fart11.mp3';
+import superepicfart from './assets/sounds/superepicfart.mp3';
 import quang1 from './assets/quang/quang1.png';
 import quang2 from './assets/quang/quang2.png';
 import quang3 from './assets/quang/quang3.png';
@@ -21,27 +22,52 @@ import quang7 from './assets/quang/quang7.png';
 import quang8 from './assets/quang/quang8.png';
 
 function App() {
-  const fartSounds = [fart1, fart2, fart3, fart4, fart5, fart6, fart7, fart8, fart9, fart10, fart11];
+  const fartSounds = [
+    fart1, fart2, fart3, fart4, fart5, fart6,
+    fart7, fart8, fart9, fart10, fart11, superepicfart
+  ];
   const quangImages = [quang1, quang2, quang3, quang4, quang5, quang6, quang7, quang8];
 
   const emojiVariants = ['💨', '💩', '🤮', '🚽', '🤢'];
   const fonts = ["'Comic Sans MS', cursive, sans-serif"];
-  
+
   const [floatingItems, setFloatingItems] = useState([]);
   const lastPlayed = useRef([]);
+  const [fartCount, setFartCount] = useState(0);
+  const [showSuperEpicAnimation, setShowSuperEpicAnimation] = useState(false);
 
   const playFart = () => {
-    let availableIndices = [];
-    for (let i = 0; i < fartSounds.length; i++) {
-      if (!lastPlayed.current.includes(i)) {
-        availableIndices.push(i);
+    const newCount = fartCount + 1;
+    setFartCount(newCount);
+
+    let randomIndex;
+    if (newCount === 100) {
+      randomIndex = fartSounds.length - 1;
+      setShowSuperEpicAnimation(true);
+      setTimeout(() => setShowSuperEpicAnimation(false), 3000);
+    } else if (newCount < 100) {
+      let availableIndices = [];
+      for (let i = 0; i < fartSounds.length - 1; i++) {
+        if (!lastPlayed.current.includes(i)) {
+          availableIndices.push(i);
+        }
       }
+      if (availableIndices.length === 0) {
+        availableIndices = Array.from({ length: fartSounds.length - 1 }, (_, index) => index);
+      }
+      randomIndex = availableIndices[Math.floor(Math.random() * availableIndices.length)];
+    } else {
+      let availableIndices = [];
+      for (let i = 0; i < fartSounds.length; i++) {
+        if (!lastPlayed.current.includes(i)) {
+          availableIndices.push(i);
+        }
+      }
+      if (availableIndices.length === 0) {
+        availableIndices = Array.from({ length: fartSounds.length }, (_, index) => index);
+      }
+      randomIndex = availableIndices[Math.floor(Math.random() * availableIndices.length)];
     }
-    if (availableIndices.length === 0) {
-      availableIndices = fartSounds.map((_, index) => index);
-    }
-    const randomIndex =
-      availableIndices[Math.floor(Math.random() * availableIndices.length)];
     lastPlayed.current.push(randomIndex);
     if (lastPlayed.current.length > 3) {
       lastPlayed.current.shift();
@@ -68,7 +94,7 @@ function App() {
       const distance = 100 + Math.random() * 200;
       const dx = Math.cos(angle) * distance;
       const dy = Math.sin(angle) * distance;
-      const duration = 1 + Math.random() * 0.5; 
+      const duration = 1 + Math.random() * 0.5;
 
       if (item.type === 'emoji') {
         const font = fonts[Math.floor(Math.random() * fonts.length)];
@@ -128,8 +154,15 @@ function App() {
         )}
       </div>
 
+      {showSuperEpicAnimation && (
+        <div className="super-epic-animation">
+          <h1>SUPER EPIC FART UNLOCKED!</h1>
+        </div>
+      )}
+
       <header className="App-header">
         <h1>Fartastic Fun!</h1>
+        <p>Fart Count: {fartCount}</p>
         <button className="fart-button" onClick={playFart}>
           Make a Fart Noise!
         </button>
