@@ -30,9 +30,9 @@ function App() {
   const emojiVariants = ['💨', '💩', '🤮'];
   const fonts = [
     "'Comic Sans MS', cursive, sans-serif",
-    "'Arial Black', Gadget, sans-serif",
-    "'Courier New', Courier, monospace",
-    "Impact, Charcoal, sans-serif",
+    // "'Arial Black', Gadget, sans-serif",
+    // "'Courier New', Courier, monospace",
+    // "Impact, Charcoal, sans-serif",
   ];
 
   const [emojis, setEmojis] = useState([]);
