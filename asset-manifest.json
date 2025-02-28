@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/big-wind/static/css/main.228d4a8a.css",
-    "main.js": "/big-wind/static/js/main.e5058655.js",
+    "main.css": "/big-wind/static/css/main.4b177852.css",
+    "main.js": "/big-wind/static/js/main.b115dd29.js",
     "static/js/453.072cbd8b.chunk.js": "/big-wind/static/js/453.072cbd8b.chunk.js",
     "static/media/quang4.png": "/big-wind/static/media/quang4.d23e8c8b964b62a647a1.png",
     "static/media/quang7.png": "/big-wind/static/media/quang7.f9e0b5a22dd4aa13350f.png",
@@ -15,6 +15,7 @@
     "static/media/quang8.png": "/big-wind/static/media/quang8.5c7192e4e4d35e768d07.png",
     "static/media/fart4.mp3": "/big-wind/static/media/fart4.ae0015f92fb955c1bd4e.mp3",
     "static/media/fart10.mp3": "/big-wind/static/media/fart10.5221ed509531c8d3b468.mp3",
+    "static/media/superepicfart.mp3": "/big-wind/static/media/superepicfart.1339ee29b206502ae333.mp3",
     "static/media/fart9.mp3": "/big-wind/static/media/fart9.dff97d513a24e05174b6.mp3",
     "static/media/fart5.mp3": "/big-wind/static/media/fart5.b1068a4449504eedff39.mp3",
     "static/media/fart3.mp3": "/big-wind/static/media/fart3.d08e563dc8e5242eb7f6.mp3",
@@ -23,12 +24,12 @@
     "static/media/fart1.mp3": "/big-wind/static/media/fart1.cdf821cc282a4f980d2d.mp3",
     "static/media/quang2.png": "/big-wind/static/media/quang2.79d7ae9d47e548671e5d.png",
     "index.html": "/big-wind/index.html",
-    "main.228d4a8a.css.map": "/big-wind/static/css/main.228d4a8a.css.map",
-    "main.e5058655.js.map": "/big-wind/static/js/main.e5058655.js.map",
+    "main.4b177852.css.map": "/big-wind/static/css/main.4b177852.css.map",
+    "main.b115dd29.js.map": "/big-wind/static/js/main.b115dd29.js.map",
     "453.072cbd8b.chunk.js.map": "/big-wind/static/js/453.072cbd8b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.228d4a8a.css",
-    "static/js/main.e5058655.js"
+    "static/css/main.4b177852.css",
+    "static/js/main.b115dd29.js"
   ]
 }
