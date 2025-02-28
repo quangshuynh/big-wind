@@ -48,6 +48,8 @@ function App() {
   const [clicksPerSecond, setClicksPerSecond] = useState(0);
   const clickTimestamps = useRef([]);
   const [superEpicUnlocked, setSuperEpicUnlocked] = useState(false);
+  const [multiplierAnnouncement, setMultiplierAnnouncement] = useState("");
+
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -192,9 +194,11 @@ function App() {
       }
       setFartCount(prev => prev - item.price);
       if (item.multiplierIncrease) {
-        setFartMultiplier(prev => prev + item.multiplierIncrease);
-        alert(`Fart Multiplier increased to ${fartMultiplier + item.multiplierIncrease}!`);
-      }
+        const newMultiplier = fartMultiplier + item.multiplierIncrease;
+        setFartMultiplier(newMultiplier);
+        setMultiplierAnnouncement(`Fart Multiplier increased to ${newMultiplier}!`);
+        setTimeout(() => setMultiplierAnnouncement(""), 3000);
+      }      
       return;
     } else {
       if (toots < item.price) {
@@ -285,6 +289,12 @@ function App() {
       {jarSaleAnnouncement && (
         <div className="jar-sale-announcement">
           <h1>{jarSaleAnnouncement}</h1>
+        </div>
+      )}
+
+      {multiplierAnnouncement && (
+        <div className="multiplier-announcement">
+          <h1>{multiplierAnnouncement}</h1>
         </div>
       )}
 

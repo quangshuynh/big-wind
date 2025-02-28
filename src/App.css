@@ -232,3 +232,33 @@ h1 {
     opacity: 0;
   }
 }
+
+.multiplier-announcement {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  background: rgba(70, 216, 126, 0.8);
+  color: white;
+  padding: 40px;
+  border-radius: 15px;
+  z-index: 200;
+  animation: multiplierAnnouncementAnimation 3s forwards;
+  pointer-events: none;
+  user-select: none;
+}
+
+@keyframes multiplierAnnouncementAnimation {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+  }
+}
